@@ -33,7 +33,7 @@ function App() {
           loop 
           playsInline
           className="absolute inset-0 w-full h-full object-cover z-0 opacity-70"
-          src="/background.mp4"
+          src="/background.mov"
         />
       )}
 
