@@ -69,7 +69,7 @@ function App() {
             <span className="text-green-400">Theo</span>
           </h1>
           <p className="font-pixel text-[10px] sm:text-sm text-yellow-300 mt-6" style={{ textShadow: '2px 2px 0 #000' }}>
-            Nivel 1 Carregado. Venha jogar!
+            Nivel 6 Carregado. Venha jogar!
           </p>
         </div>
 
