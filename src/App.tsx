@@ -26,9 +26,20 @@ function App() {
   return (
     <div className="min-h-screen relative overflow-hidden text-white flex flex-col justify-center">
       
+      {/* Background Video */}
+      {!isLoading && (
+        <video 
+          autoPlay 
+          loop 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0 opacity-70"
+          src="/background.mp4"
+        />
+      )}
+
       {/* Dynamic Background Effects */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply"
+        className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply z-0"
         style={{
           backgroundImage: `
             linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), 
@@ -39,7 +50,7 @@ function App() {
         }}
       />
       
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none z-0" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80 pointer-events-none z-0" />
 
       {/* Floating XP Orbs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">

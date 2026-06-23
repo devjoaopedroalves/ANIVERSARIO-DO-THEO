@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
   const [isFading, setIsFading] = useState(false);
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
-          setTimeout(() => setIsFading(true), 300); // Wait a bit at 100%
-          setTimeout(() => onComplete(), 1300); // 1s fade out duration
+          setIsReady(true);
           return 100;
         }
         return prev + Math.floor(Math.random() * 12) + 2;
@@ -18,7 +18,12 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
     }, 150);
 
     return () => clearInterval(interval);
-  }, [onComplete]);
+  }, []);
+
+  const handleEnter = () => {
+    setIsFading(true);
+    setTimeout(() => onComplete(), 1000); // 1s fade out duration
+  };
 
   return (
     <div
@@ -42,7 +47,7 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
         </h2>
         
         {/* Progress Bar Container */}
-        <div className="w-64 sm:w-96 h-8 border-4 border-white bg-black/80 p-1 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+        <div className="w-64 sm:w-96 h-8 border-4 border-white bg-black/80 p-1 shadow-[0_0_20px_rgba(0,0,0,0.5)] mb-6">
           {/* Progress Fill */}
           <div 
             className="h-full bg-[#83ff26] shadow-[inset_0_-4px_0_rgba(0,0,0,0.2)] transition-all duration-200 ease-linear"
@@ -50,9 +55,19 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
           />
         </div>
         
-        <p className="mt-4 text-gray-400 font-pixel text-[8px] sm:text-[10px]">
-          Construindo terreno: {Math.min(progress, 100)}%
-        </p>
+        {!isReady ? (
+          <p className="text-gray-400 font-pixel text-[8px] sm:text-[10px]">
+            Construindo terreno: {Math.min(progress, 100)}%
+          </p>
+        ) : (
+          <button 
+            onClick={handleEnter}
+            className="mc-btn animate-pulse w-full max-w-xs text-sm sm:text-base py-3"
+            style={{ borderColor: '#ffffff #555555 #555555 #ffffff', backgroundColor: '#559b38' }}
+          >
+            ENTRAR NO MUNDO
+          </button>
+        )}
       </div>
     </div>
   );
