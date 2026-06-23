@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  --font-pixel: 'Press Start 2P', system-ui, sans-serif;
+  
+  --color-minecraft-dirt: #866043;
+  --color-minecraft-grass: #559b38;
+  --color-minecraft-stone: #7d7d7d;
+  --color-minecraft-btn: #c6c6c6;
+  --color-minecraft-btn-hover: #8eabeb;
+}
+
+@layer base {
+  body {
+    @apply font-pixel bg-[#866043] text-white antialiased m-0 p-0 overflow-x-hidden;
+    /* Richer Dirt Pattern */
+    background-color: #744e31;
+    background-image: 
+      linear-gradient(45deg, #5c3c24 25%, transparent 25%, transparent 75%, #5c3c24 75%, #5c3c24), 
+      linear-gradient(45deg, #5c3c24 25%, transparent 25%, transparent 75%, #5c3c24 75%, #5c3c24);
+    background-size: 32px 32px;
+    background-position: 0 0, 16px 16px;
+    image-rendering: pixelated;
+  }
+}
+
+@layer components {
+  /* Classic Minecraft Menu Button */
+  .mc-btn {
+    @apply relative inline-block text-white text-center cursor-pointer;
+    background-color: #c6c6c6;
+    border: 3px solid;
+    border-color: #ffffff #555555 #555555 #ffffff;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Press Start 2P', system-ui, sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    text-shadow: 2px 2px 0px #3f3f3f;
+    transition: none;
+    user-select: none;
+    box-shadow: inset -2px -2px 0px rgba(0,0,0,0.1), inset 2px 2px 0px rgba(255,255,255,0.2);
+  }
+  
+  .mc-btn:active, .mc-btn.active {
+    border-color: #555555 #ffffff #ffffff #555555;
+    background-color: #a0a0a0;
+    box-shadow: inset 2px 2px 0px rgba(0,0,0,0.1);
+    transform: translateY(2px);
+  }
+
+  .mc-btn:hover {
+    @apply bg-minecraft-btn-hover text-[#ffffa0];
+    border-color: #d1d8ff #3c4a85 #3c4a85 #d1d8ff;
+    text-shadow: 2px 2px 0px #242424;
+  }
+
+  /* Minecraft Inventory Panel */
+  .mc-panel {
+    @apply relative bg-[#c6c6c6] text-black;
+    border: 4px solid;
+    border-color: #ffffff #555555 #555555 #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  /* Tooltip/Sign style */
+  .mc-sign {
+    @apply bg-[#94764d] text-white;
+    border: 4px solid #362615;
+    box-shadow: inset 2px 2px 0 #bc9862, inset -2px -2px 0 #57442a;
+    text-shadow: 2px 2px 0 #2b1f13;
+  }
+
+  /* Text Inputs */
+  .mc-input {
+    @apply bg-black text-white p-3 font-pixel focus:outline-none w-full text-xs sm:text-sm;
+    border: 3px solid;
+    border-color: #555555 #ffffff #ffffff #555555;
+    box-shadow: inset 3px 3px 0 rgba(0,0,0,0.8);
+  }
+  
+  .mc-input:focus {
+    border-color: #ffffff #555555 #555555 #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Animations */
+@keyframes fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+.animate-fade-out { animation: fade-out 1s ease-in-out forwards; }
+
+@keyframes slide-up-achievement {
+  0% { transform: translateY(150%); opacity: 0; }
+  10% { transform: translateY(0); opacity: 1; }
+  90% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-150%); opacity: 0; }
+}
+.animate-achievement {
+  animation: slide-up-achievement 4.5s ease-in-out forwards;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Particles / Experience Orbs */
+.xp-orb {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #83ff26;
+  box-shadow: 0 0 8px #83ff26, inset 2px 2px 0 #eaffcc, inset -2px -2px 0 #468c14;
+  border-radius: 50%;
+  image-rendering: pixelated;
+  animation: float-up 5s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) scale(0.5) rotate(0deg);
+    opacity: 0;
+  }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% {
+    transform: translateY(-20vh) scale(1) rotate(360deg);
+    opacity: 0;
+  }
+}
