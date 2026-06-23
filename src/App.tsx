@@ -37,18 +37,7 @@ function App() {
         />
       )}
 
-      {/* Dynamic Background Effects */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply z-0"
-        style={{
-          backgroundImage: `
-            linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), 
-            linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000)
-          `,
-          backgroundSize: '128px 128px',
-          backgroundPosition: '0 0, 64px 64px'
-        }}
-      />
+      {/* Dynamic Background Effects Removed since we have a real video */}
       
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/80 pointer-events-none z-0" />
 
